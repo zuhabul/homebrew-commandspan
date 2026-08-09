@@ -1,0 +1,40 @@
+class Commandspan < Formula
+  desc "Remote terminal + agent control plane: pair your phone, approve agent actions live, drive tmux/mosh from anywhere"
+  homepage "https://github.com/zuhabul/commandspan"
+  url "https://github.com/zuhabul/homebrew-commandspan/releases/download/v0.1.0/commandspan-v0.1.0.tar.gz"
+  sha256 "7a2a76f0696f1288fcfbce616ef684e27bf782ee836b9b3adb11309a47ae71f6"
+  license "Proprietary"
+  head "https://github.com/zuhabul/commandspan.git", branch: "main"
+
+  depends_on "rust" => :build
+  depends_on "pkg-config" => :build
+  depends_on "mosh"
+  depends_on "tmux"
+  depends_on "qrencode"
+  depends_on "jq"
+
+  def install
+    # Build the daemon + supervisor from the release tarball.
+    system "cargo", "install", *std_cargo_args(path: "services/daemon")
+    system "cargo", "install", *std_cargo_args(path: "crates/supervisor")
+
+    # Pairing + hook helper scripts (self-contained; no repo layout needed).
+    bin.install "scripts/commandspan-pair-qr.sh" => "commandspan-pair-qr"
+    bin.install "scripts/install-hook-claude.sh" => "commandspan-hook-claude"
+    bin.install "scripts/install-hooks.sh" => "commandspan-install-hooks"
+    bin.install "scripts/display-pairing-qr.swift" => "commandspan-display-qr"
+    bin.install "scripts/render-pairing-qr.swift" => "commandspan-render-qr"
+  end
+
+  service do
+    run [opt_bin/"commandspand", "serve"]
+    keep_alive true
+    working_dir var
+    log_path var/"log/commandspan.log"
+    error_log_path var/"log/commandspan.error.log"
+  end
+
+  test do
+    assert_match "commandspand", shell_output("#{bin}/commandspand --version")
+  end
+end
