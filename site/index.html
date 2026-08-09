@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commandspan — remote terminal + agent control plane</title>
+<meta name="description" content="Commandspan pairs your iPhone with your dev machine. Approve agent actions live, drive tmux/mosh from anywhere, in real time.">
+<style>
+  :root {
+    --bg:#0b0d12; --surface:#14171f; --line:#232838;
+    --text:#e8ecf3; --muted:#9aa4b8; --accent:#5b8cff; --good:#3ddc84;
+    --mono:"SFMono-Regular",ui-monospace,Menlo,monospace;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.6; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 24px; }
+  header { padding:72px 0 40px; border-bottom:1px solid var(--line); }
+  .logo { font-weight:700; letter-spacing:.02em; }
+  .logo span { color:var(--accent); }
+  h1 { font-size:clamp(28px,5vw,44px); font-weight:800; margin:20px 0 12px; letter-spacing:-.02em; }
+  .tag { color:var(--muted); font-size:clamp(16px,2.4vw,20px); max-width:640px; }
+  .cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+  .btn { display:inline-block; padding:12px 22px; border-radius:10px; font-weight:600; text-decoration:none; }
+  .btn-primary { background:var(--accent); color:#fff; }
+  .btn-ghost { border:1px solid var(--line); color:var(--text); }
+  .code { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px 18px; font-family:var(--mono); font-size:13px; overflow-x:auto; }
+  section { padding:56px 0; border-bottom:1px solid var(--line); }
+  h2 { font-size:24px; font-weight:700; margin-bottom:20px; }
+  h3 { font-size:16px; font-weight:600; margin:18px 0 8px; color:var(--accent); }
+  p, li { color:var(--muted); }
+  ul { padding-left:20px; }
+  li { margin:6px 0; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .card .icon { font-size:22px; }
+  .card h3 { margin-top:10px; }
+  .steps { counter-reset:step; }
+  .step { position:relative; padding-left:52px; margin:20px 0; }
+  .step::before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:36px; height:36px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .qr { text-align:center; }
+  .qr img { width:220px; height:220px; border-radius:10px; border:1px solid var(--line); }
+  .qr .caption { color:var(--muted); font-size:14px; margin-top:10px; }
+  footer { padding:40px 0; color:var(--muted); font-size:14px; }
+  .badge { display:inline-block; background:rgba(61,220,132,.12); color:var(--good); border:1px solid rgba(61,220,132,.3); padding:3px 10px; border-radius:999px; font-size:12px; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="logo">Command<span>span</span></div>
+  <h1>Your machine, in your pocket.<br>Real-time agent control.</h1>
+  <p class="tag">Commandspan pairs your iPhone with your dev machine over a private, zero-open-port link. Approve agent actions from the lock screen, drive tmux/mosh, and control the full server — live.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="#install">Install</a>
+    <a class="btn btn-ghost" href="#features">Features</a>
+    <a class="btn btn-ghost" href="#how">How it works</a>
+  </div>
+</header>
+
+<section id="install">
+  <h2>Install in 30 seconds</h2>
+  <div class="steps">
+    <div class="step"><h3>Install the tap</h3>
+      <div class="code">brew tap zuhabul/commandspan</div>
+    </div>
+    <div class="step"><h3>Install + start</h3>
+      <div class="code">brew install commandspan && brew services start commandspan</div>
+    </div>
+    <div class="step"><h3>Run the setup wizard</h3>
+      <p>Full or Minimal profile, hooks auto-installed, then a QR to scan.</p>
+      <div class="code" style="margin-top:10px;">commandspan-setup</div>
+    </div>
+    <div class="step"><h3>Scan from your iPhone</h3>
+      <div class="qr"><img src="img/pairing-qr-demo.png" alt="Commandspan pairing QR">
+        <div class="caption">Example pairing QR — scan with the Commandspan app</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <h2>Everything, from your phone</h2>
+  <div class="grid">
+    <div class="card"><div class="icon">🖥️</div><h3>Real-time terminal</h3><p>Live tmux mirror with exact fidelity — scroll, select, paste from your phone.</p></div>
+    <div class="card"><div class="icon">🔔</div><h3>Live approvals</h3><p>Agent permission requests arrive as lock-screen Live Activity. Approve by tap, type, or voice.</p></div>
+    <div class="card"><div class="icon">🗂️</div><h3>New sessions</h3><p>Create a new tmux/mosh session on the host right from the Fleet tab.</p></div>
+    <div class="card"><div class="icon">📁</div><h3>Files + git</h3><p>Browse, transfer, and commit from your pocket.</p></div>
+    <div class="card"><div class="icon">🤖</div><h3>Works with your agents</h3><p>Claude Code, Codex, and any harness hook journal into one bus.</p></div>
+    <div class="card"><div class="icon">🔒</div><h3>Zero open ports</h3><p>UNIX socket + P2P. No public firewall holes, no cloud relay.</p></div>
+  </div>
+</section>
+
+<section id="how">
+  <h2>How it works</h2>
+  <p>Commandspan runs a daemon on your host that exposes a sub-5ms UNIX-socket bus. Agent hooks (Claude Code, Codex) journal events into it; approval requests broadcast to your phone. You decide on a Live Activity or the watch; the decision resolves the waiting hook through one shared registry — over HTTP or the bus, it lands.</p>
+</section>
+
+<section id="docs">
+  <h2>Docs</h2>
+  <ul>
+    <li><a href="https://github.com/zuhabul/commandspan" style="color:var(--accent)">Source (private)</a> — Rust workspace + iOS app</li>
+    <li><a href="https://github.com/zuhabul/homebrew-commandspan" style="color:var(--accent)">Homebrew tap</a> — formula + release tarballs</li>
+  </ul>
+</section>
+
+<footer>
+  Commandspan · pair your phone, approve live, control everything.
+</footer>
+
+</div>
+</body>
+</html>
