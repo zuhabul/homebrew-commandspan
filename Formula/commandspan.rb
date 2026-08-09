@@ -1,8 +1,8 @@
 class Commandspan < Formula
   desc "Remote terminal + agent control plane: pair your phone, approve agent actions live, drive tmux/mosh from anywhere"
   homepage "https://github.com/zuhabul/commandspan"
-  url "https://github.com/zuhabul/homebrew-commandspan/releases/download/v0.1.0/commandspan-v0.1.0.tar.gz"
-  sha256 "b6908dfd769684eb83b01bdf6062841355e413caa92d01715c3d9eee0b840831"
+  url "https://github.com/zuhabul/homebrew-commandspan/releases/download/v0.1.1/commandspan-v0.1.1.tar.gz"
+  sha256 "6bd9d8dcdfd7cc9cbebe5a3e870636e3602872e5a6b838bf4d7d0a93d8ad5718"
   license "Proprietary"
   head "https://github.com/zuhabul/commandspan.git", branch: "main"
 
@@ -20,6 +20,7 @@ class Commandspan < Formula
 
     # Pairing + hook helper scripts (self-contained; no repo layout needed).
     bin.install "scripts/commandspan-pair-qr.sh" => "commandspan-pair-qr"
+    bin.install "scripts/commandspan-setup.sh" => "commandspan-setup"
     bin.install "scripts/install-hook-claude.sh" => "commandspan-hook-claude"
     bin.install "scripts/install-hooks.sh" => "commandspan-install-hooks"
     bin.install "scripts/display-pairing-qr.swift" => "commandspan-display-qr"
