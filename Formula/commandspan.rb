@@ -1,8 +1,8 @@
 class Commandspan < Formula
   desc "Remote terminal + agent control plane: pair your phone, approve agent actions live, drive tmux/mosh from anywhere"
   homepage "https://github.com/zuhabul/commandspan"
-  url "https://github.com/zuhabul/homebrew-commandspan/releases/download/v0.1.1/commandspan-v0.1.1.tar.gz"
-  sha256 "6bd9d8dcdfd7cc9cbebe5a3e870636e3602872e5a6b838bf4d7d0a93d8ad5718"
+  url "https://github.com/zuhabul/homebrew-commandspan/releases/download/v0.1.2/commandspan-v0.1.2.tar.gz"
+  sha256 "f275274afc3e476d97d14b724af41bb3fce3bd022cad8127a24a03afab1562ed"
   license "Proprietary"
   head "https://github.com/zuhabul/commandspan.git", branch: "main"
 
