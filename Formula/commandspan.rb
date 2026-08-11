@@ -1,8 +1,8 @@
 class Commandspan < Formula
   desc "Remote terminal + agent control plane: pair your phone, approve agent actions live, drive tmux/mosh from anywhere"
   homepage "https://github.com/zuhabul/commandspan"
-  url "https://github.com/zuhabul/homebrew-commandspan/releases/download/v0.1.18/commandspan-v0.1.18.tar.gz"
-  sha256 "77d62d821f2dc6ac238045eefb9ddff1160733e756519d6a4c3e892ce531c4d7"
+  url "https://github.com/zuhabul/homebrew-commandspan/releases/download/v0.1.19/commandspan-v0.1.19.tar.gz"
+  sha256 "0e16c82b6c1bca9197a09cfcf1a17813f25a90705bca2c65fac2cb6d22ca79b3"
   license "Proprietary"
   head "https://github.com/zuhabul/commandspan.git", branch: "main"
 
@@ -34,6 +34,10 @@ class Commandspan < Formula
     working_dir var
     log_path var/"log/commandspan.log"
     error_log_path var/"log/commandspan.error.log"
+    # tmux/mosh live under Homebrew's bin; the launchd service default PATH
+    # (usr/bin:bin) cannot find them. Without /opt/homebrew/bin, session
+    # discovery returns a bare parse error (tmux "unavailable").
+    environment_variables "PATH" => "#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin"
   end
 
   test do
